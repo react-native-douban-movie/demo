@@ -7,6 +7,10 @@ class MovieDetailScreen extends React.Component{
   
   static navigationOptions = {
     title: '电影',//标题
+    headerTintColor :'#eee',
+    headerStyle :{
+      backgroundColor:'#2F393C'
+    }
   };
 
   constructor(props){

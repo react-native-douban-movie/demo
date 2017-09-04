@@ -2,9 +2,10 @@ import React from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
 
 import DetailImage from './../components/movieDetail/DetailImage';
-import Title from './../components/movieDetail/Title'
-import Rating from './../components/movieDetail/Rating'
-
+import Title from './../components/movieDetail/Title';
+import Rating from './../components/movieDetail/Rating';
+import MovieBtn from './../components/movieDetail/MovieBtn';
+import Describe from  './../components/movieDetail/Describe'
 
 class MovieItem extends React.Component{
   constructor(props){
@@ -15,11 +16,10 @@ class MovieItem extends React.Component{
   }
 
   render(){
-    console.warn(JSON.stringify(this.props));
     if( !this.props.data.id ){
-      return <Text>正在搜索。。。</Text>;
+      return <Text style={{textAlign:'center'}}>正在搜索。。。</Text>;
     }
-    const { images, title, year, genres, rating, ratings_count } = this.props.data;
+    const { images, title, year, genres, rating, ratings_count, summary } = this.props.data;
     return(
       <ScrollView style={styles.container}>
         <DetailImage url={images.large} />
@@ -40,6 +40,14 @@ class MovieItem extends React.Component{
             />
           </View>
         </View>
+        <View style={styles.movieBtn}>
+          <MovieBtn rating={rating.average}></MovieBtn>
+        </View>
+        <View style={styles.sell}>
+          <Text>选座购票</Text>
+          <Text style={styles.price}>23￥ 起 ></Text>
+        </View>
+        <Describe text={summary}/>
       </ScrollView>
     )
   }
@@ -62,10 +70,29 @@ const styles = StyleSheet.create({
   left: {
     flex: 1,
     flexDirection: 'row',
-    paddingTop: 15,
+    paddingTop: 10,
     paddingBottom: 5,
     paddingRight: 5,
     paddingLeft: 15,
+  },
+  movieBtn: {
+    flex:1,
+    height: 'auto',
+    flexDirection: 'row',
+    paddingTop:10,
+    paddingBottom:10,
+  },
+  sell:{
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#aaa',
+    marginLeft: 20,
+    paddingBottom: 4,
+  },
+  price:{
+    paddingRight: 7,
   }
 })
 

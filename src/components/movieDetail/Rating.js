@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,  
     shadowColor: "#000",  
     //注意：这一句是可以让安卓拥有灰色阴影  
-    elevation: 10,  
+    elevation: 4,  
   },
   comment:{
     fontSize:8,
