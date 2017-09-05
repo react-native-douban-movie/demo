@@ -5,8 +5,9 @@ import DetailImage from './../components/movieDetail/DetailImage';
 import Title from './../components/movieDetail/Title';
 import Rating from './../components/movieDetail/Rating';
 import MovieBtn from './../components/movieDetail/MovieBtn';
-import Describe from  './../components/movieDetail/Describe'
-
+import Describe from  './../components/movieDetail/Describe';
+import Actor from './../components/movieDetail/Actor';
+ 
 class MovieItem extends React.Component{
   constructor(props){
     super(props);
@@ -19,7 +20,7 @@ class MovieItem extends React.Component{
     if( !this.props.data.id ){
       return <Text style={{textAlign:'center'}}>正在搜索。。。</Text>;
     }
-    const { images, title, year, genres, rating, ratings_count, summary } = this.props.data;
+    const { images, title, year, genres, rating, ratings_count, summary, casts, directors } = this.props.data;
     return(
       <ScrollView style={styles.container}>
         <DetailImage url={images.large} />
@@ -48,6 +49,7 @@ class MovieItem extends React.Component{
           <Text style={styles.price}>23￥ 起 ></Text>
         </View>
         <Describe text={summary}/>
+        <Actor actor={[...casts,...directors]}/>
       </ScrollView>
     )
   }
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
   },
   price:{
     paddingRight: 7,
+    color: '#D25252',
   }
 })
 
