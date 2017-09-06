@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, ListView, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import MovieItem from './../components/moveList/MoveItem'
 import { getList } from './../services/child'
@@ -8,8 +8,12 @@ import { getList } from './../services/child'
 class MovieList extends React.Component{
   constructor(props){
     super(props);
+    const ds = new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 != row2,
+    })
     this.state = {
-      list:[]
+      dataSource:ds,
+      list:[],
     }
   };
   
@@ -28,18 +32,19 @@ class MovieList extends React.Component{
 
   renderList = (data) => {
     const  {navigation} = this.props;
-    return data.map(item=>{
-      return <MovieItem key={ item.id } data={item} navigation={navigation} />
-    })
+    return <MovieItem key={ data.id } data={data} navigation={navigation} />
   }
 
   render(){
     const {list} = this.state;
     return (
-      <ScrollView style={styles.container}>
-        <View style={styles.title}><Text>电影列表</Text></View>
-        {this.renderList(list)}
-      </ScrollView>
+      <ListView style={styles.imageList}
+        dataSource={this.state.dataSource.cloneWithRows(this.state.list)}
+        renderRow={(rowData, sectionId, rowId) => this.renderList(rowData, rowId)}
+        horizontal={false}
+        enableEmptySections={true}
+      >
+      </ListView>
     )
   }
 }

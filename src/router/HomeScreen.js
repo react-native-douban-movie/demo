@@ -1,12 +1,18 @@
 import React from 'react';
+import { Text } from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import MovieList from './../container/movieList';
 import MovieDetailScreen from './MovieDetailScreen'
 
-class HomeScreen extends React.Component{
-
+class Home extends React.Component{
   static navigationOptions = {
-    title: '电影列表',//标题
+    title: '电影',//标题
+    headerTintColor :'#eee',
+    fontSize:12,
+    headerStyle :{
+      backgroundColor:'#2F393C',
+      height:30,
+    }
   };
 
   constructor(props){
@@ -23,10 +29,15 @@ class HomeScreen extends React.Component{
     )
   }
 }
-
-const Home  = StackNavigator({
-  HomeScreen: {screen: HomeScreen},
+const HomeScreen  = StackNavigator({
+  HomeScreen: {screen: Home},
   MovieDetailScreen: {screen: MovieDetailScreen},
+},{
+  initialRouteName: 'HomeScreen', // 默认显示界面
+  mode: 'card',  // 页面切换模式, 左右是card(相当于iOS中的push效果), 上下是modal(相当于iOS中的modal效果)
+  headerMode: 'screen', // 导航栏的显示模式, screen: 有渐变透明效果, float: 无透明效果, none: 隐藏导航栏
+  onTransitionStart: ()=>{ console.log('导航栏切换开始'); },  // 回调
+  onTransitionEnd: ()=>{ console.log('导航栏切换结束'); }  // 回调
 })
 
-export default Home;
+export default HomeScreen;
