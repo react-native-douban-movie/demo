@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, ScrollView, Text, ListView, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import MovieItem from './../components/moveList/MoveItem'
+import MovieItem from './../components/moveList/MoveItem';
+import Banner from './../components/Banner';
 import { getList } from './../services/child'
 
 
@@ -32,19 +33,29 @@ class MovieList extends React.Component{
 
   renderList = (data) => {
     const  {navigation} = this.props;
-    return <MovieItem key={ data.id } data={data} navigation={navigation} />
+    if (data.name === 'banner') {
+      return (
+        <View style={styles.banner}>
+          <Banner/>
+        </View>
+      )
+    } else {
+      return <MovieItem key={ data.id } data={data} navigation={navigation} />
+    }
   }
-
   render(){
     const {list} = this.state;
     return (
-      <ListView style={styles.imageList}
-        dataSource={this.state.dataSource.cloneWithRows(this.state.list)}
-        renderRow={(rowData, sectionId, rowId) => this.renderList(rowData, rowId)}
-        horizontal={false}
-        enableEmptySections={true}
-      >
-      </ListView>
+      <View>
+        <ListView
+          dataSource={this.state.dataSource.cloneWithRows([{ 'name': 'banner' },...this.state.list])}
+          renderRow={(rowData, sectionId, rowId) => this.renderList(rowData, rowId)}
+          horizontal={false}
+          enableEmptySections={false}
+          removeClippedSubviews={false}
+        >
+        </ListView>
+      </View>
     )
   }
 }
@@ -54,15 +65,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  title: {
-    flex: 1,
-    flexDirection: 'row',
+  banner: {
     width: '100%',
-    height: 50,
-    alignItems:'center',
-    justifyContent:'flex-start',
-    paddingLeft : 10
-  },
+    height: 200,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 0,
+    margin: 0,
+  }
 });
 
 export default MovieList;
