@@ -30,7 +30,7 @@ class Banner extends React.Component {
             style={styles.slide}
           />
           <Image 
-            source={{uri:'https://raw.githubusercontent.com/sharkwarn/sharkwarn.github.io/master/icon/banner1.jpg'}}
+            source={{uri:'https://raw.githubusercontent.com/sharkwarn/sharkwarn.github.io/master/icon/banenr3.jpg'}}
             style={styles.slide}
           />
         </Swiper>
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     height: 200,
-    backgroundColor: '#0f0',
   },
   container2: {
     width: '100%',

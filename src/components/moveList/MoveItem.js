@@ -16,7 +16,7 @@ class MovieItem extends React.Component{
   }
 
   render () {
-    const {data} = this.props;
+    const { data, value } = this.props;
     return (
       <View style={styles.container}>
         <View  style={ styles.img }>
@@ -33,9 +33,9 @@ class MovieItem extends React.Component{
           <Button
             color="#a00"
             onPress={()=>this.linkToBtn(data.id)}
-            value="购票"
-            title='购票'
-            accessibilityLabel='购票'
+            value={value ? '购票' : '预售'}
+            title={value ? '购票' : '预售'}
+            accessibilityLabel={value ? '购票' : '预售'}
           />
         </View>
       </View> 

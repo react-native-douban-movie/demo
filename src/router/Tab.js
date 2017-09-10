@@ -5,61 +5,7 @@ import IndexPage from './IndexPage';
 // import TabNavigator from 'react-native-tab-navigator';
 import HomeScreen from './HomeScreen';
 import User from './User';
-import Found from './Found'
-// 注册tabs
-// class Tab extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       selectedTab:'home',
-//     };
-//   }
-//   render() {
-//     return (
-//       <TabNavigator>
-//         <TabNavigatorItem
-//           key='1'
-//           selected={this.state.selectedTab === 'home'}
-//           title="电影"
-//           renderIcon={() => <Image source={{ uri: 'https://raw.githubusercontent.com/sharkwarn/sharkwarn.github.io/master/icon/movie.png' }}
-//             style={{width:15,height:15}}
-//           />}
-//           onPress={() => this.setState({ selectedTab: 'home' })}
-//         >
-//           <View>
-//             <IndexPage />
-//           </View>
-//         </TabNavigatorItem>
-//         <TabNavigatorItem
-//           key='2'
-//           selected={this.state.selectedTab === 'detail'}
-//           title="找片"
-//           renderIcon={() => <Image source={{ uri: 'https://raw.githubusercontent.com/sharkwarn/sharkwarn.github.io/master/icon/eye.png' }}
-//             style={{width:15,height:15}}
-//           />}
-//           onPress={() => this.setState({ selectedTab: 'detail' })}
-//         >
-//           <View>
-//             <MovieDetailScreen/>
-//           </View>
-//         </TabNavigatorItem>
-//         <TabNavigatorItem
-//           key='3'
-//           selected={this.state.selectedTab === 'user'}
-//           title="我的"
-//           renderIcon={() => <Image source={{ uri: 'https://raw.githubusercontent.com/sharkwarn/sharkwarn.github.io/master/icon/user.png' }}
-//             style={{width:15,height:15}}
-//           />}
-//           onPress={() => this.setState({ selectedTab: 'user' })}
-//         >
-//           <View>
-//             <Text>用户</Text>
-//           </View>
-//         </TabNavigatorItem>
-//       </TabNavigator>
-//     )
-//   }
-// }
+import FoundScreen from './FoundScreen';
 
 const Tab = TabNavigator({
   IndexPage: {
@@ -78,7 +24,7 @@ const Tab = TabNavigator({
       })
   },
   Found: {
-    screen: Found,
+    screen: FoundScreen,
     navigationOptions: ({navigation}) => ({
       tabBarLabel: '找片',
       tabBarIcon: ({focused,tintColor}) => (

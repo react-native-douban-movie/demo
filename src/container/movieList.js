@@ -3,7 +3,9 @@ import { View, ScrollView, Text, ListView, StyleSheet } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import MovieItem from './../components/moveList/MoveItem';
 import Banner from './../components/Banner';
-import { getList } from './../services/child'
+import Tab from './../components/moveList/Tab';
+import { getList } from './../services/child';
+import { getComingMovie } from './../services/movieDetail';
 
 
 class MovieList extends React.Component{
@@ -15,6 +17,8 @@ class MovieList extends React.Component{
     this.state = {
       dataSource:ds,
       list:[],
+      isHot: true,
+      comingList: [],
     }
   };
   
@@ -27,8 +31,24 @@ class MovieList extends React.Component{
     }
   }
 
+  getComingMovie= async() => {
+    const res = await getComingMovie();
+    if(res&&res.subjects) {
+      this.setState({
+        comingList: res.subjects,
+      })
+    }
+  }
+
   componentDidMount(){  
     this.getListData();
+    this.getComingMovie();
+  }
+
+  isHotChange=(value) => {
+    this.setState({
+      isHot: value,
+    })
   }
 
   renderList = (data) => {
@@ -39,16 +59,24 @@ class MovieList extends React.Component{
           <Banner/>
         </View>
       )
+    } else if (data.name === 'tab') {
+        return (
+          <View>
+            <Tab onChange={this.isHotChange} value={this.state.isHot} />
+          </View>
+          
+        )
     } else {
-      return <MovieItem key={ data.id } data={data} navigation={navigation} />
+      return <MovieItem value={this.state.isHot} key={ data.id } data={data} navigation={navigation} />
     }
   }
   render(){
-    const {list} = this.state;
+    const { list, isHot, comingList } = this.state;
+    const arr = isHot ? list : comingList;
     return (
       <View>
         <ListView
-          dataSource={this.state.dataSource.cloneWithRows([{ 'name': 'banner' },...this.state.list])}
+          dataSource={this.state.dataSource.cloneWithRows([{ 'name': 'banner' },{ 'name':'tab' }, ...arr])}
           renderRow={(rowData, sectionId, rowId) => this.renderList(rowData, rowId)}
           horizontal={false}
           enableEmptySections={false}
