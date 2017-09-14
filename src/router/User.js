@@ -2,9 +2,26 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import { View, Text, ScrollView, TouchableHighlight, Animated, Dimensions, PixelRatio, StyleSheet } from 'react-native';
 
+import RowList from './../container/RowList';
+import TopMovie from './../container/TopMovie';
+import TopTV from './../container/TopTV';
+
 const deviceWidth = Dimensions.get('window').width;
 
-import { getHotMovieList, getHotTVList } from './../services/top';
+import { 
+  getHotMovieList, 
+  getHotTVList, 
+  getNewMovieList, 
+  getTopMovieList, 
+  getChinaMovieList, 
+  getColMovieList, 
+  getNewTVList,
+  getWestMovieList,
+  getUSTVList,
+  getUKTVList,
+  getKOTVList,
+  getHATVList,
+} from './../services/top';
 class User extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +29,18 @@ class User extends React.Component {
       hotMovieList: [],
       hotTVList: [],
       left: new Animated.Value(0),
+      newList: [],
+      TopMovieList:[],
       value: true,
+      getTopMovieList:[],
+      getChinaMovieList:[],
+      getColMovieList:[],
+      getWestMovieList:[],
+      getNewTVList: [],
+      getUSTVList: [],
+      getUKTVList: [],
+      getKOTVList: [],
+      getHATVList: []
     };
   }
 
@@ -26,6 +54,16 @@ class User extends React.Component {
     this.setState({
       value: value
     })
+  }
+
+  getMovieList=async(func,type) => {
+    const res = await func();
+    if (res.subjects && res.subjects.length>0 ) {
+      this.state[type] = res.subjects;
+      this.setState({
+        ...this.state
+      })
+    }
   }
 
   getHotMovie= async() => {
@@ -46,13 +84,55 @@ class User extends React.Component {
     }
   }
 
+  getList= async(type) => {
+    const newList  = await getNewMovieList();
+    
+    const TopMovieList = await getTopMovieList();
+    const ChinaMovieList = await getChinaMovieList();
+    const ColMovieList = await getColMovieList();
+    const WestMovieList = await getWestMovieList();
+    this.setState({
+      'newList': newList.subjects,
+      'getTopMovieList': TopMovieList.subjects,
+      'getChinaMovieList': ChinaMovieList.subjects,
+      'getColMovieList': ColMovieList.subjects,
+      'getWestMovieList': WestMovieList.subjects,
+    });
+  }
+
   componentDidMount() {
     this.getHotMovie();
     this.getHotTV();
+    // this.getList();
+    this.getMovieList(getTopMovieList,'getTopMovieList');
+    this.getMovieList(getNewMovieList,'newList');
+    this.getMovieList(getChinaMovieList,'getChinaMovieList');
+    this.getMovieList(getColMovieList,'getColMovieList');
+    this.getMovieList(getWestMovieList,'getWestMovieList');
+    this.getMovieList(getNewTVList,'getNewTVList');
+    this.getMovieList(getUSTVList,'getUSTVList');
+    this.getMovieList(getUKTVList,'getUKTVList');
+    this.getMovieList(getKOTVList,'getKOTVList');
+    this.getMovieList(getHATVList,'getHATVList');
   }
 
   render() {
-    const {value,left} = this.state;
+    const {
+      value,
+      left,
+      hotMovieList,
+      getTopMovieList,
+      newList,
+      getChinaMovieList,
+      getColMovieList,
+      getWestMovieList,
+      getNewTVList,
+      getUSTVList,
+      getUKTVList,
+      getKOTVList,
+      getHATVList
+    } = this.state;
+    // console.warn(JSON.stringify(this.state))
     return (
       <View style={styles.container}>
         <View style={styles.title}>
@@ -82,9 +162,28 @@ class User extends React.Component {
           >
           </Animated.View>
         </View>
-        <View style={styles.main}>
-
-        </View>
+        {this.state.value ? (
+            <TopMovie
+              data={{
+                hotMovieList,
+                getTopMovieList,
+                newList,
+                getChinaMovieList,
+                getColMovieList,
+                getWestMovieList,
+              }} 
+            />
+          ) : (
+            <TopTV
+              data={{
+                getNewTVList,
+                getUSTVList,
+                getUKTVList,
+                getKOTVList,
+                getHATVList
+              }}
+            />
+          )}
       </View>
     )
   }

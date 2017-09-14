@@ -41,7 +41,6 @@ const styles= StyleSheet.create({
   left: {
     width: 26,
     marginRight: 10,
-    backgroundColor: '#0f0'
   },
   right: {
     height: 'auto',
