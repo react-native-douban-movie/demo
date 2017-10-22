@@ -2,7 +2,6 @@ import React from 'react';
 import { View, ScrollView, Text, StyleSheet } from 'react-native';
 
 function Title ({header}) {
-  console.log(JSON.stringify(header))
   const renderTitle = () => {
     const { genres, year } = header;
     let str = `${year} `;

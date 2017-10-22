@@ -1,8 +1,16 @@
-最新热门电影api
-```
-https://movie.douban.com/j/search_subjects?type=movie&tag=%E7%83%AD%E9%97%A8&page_limit=40&page_start=0
-```
-最近热门电视剧
-```
-https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&page_limit=40&page_start=0
-```
+# react-native-doubanmovie
+
+### 一个app的RN版本
+
+####  因为最近在学react-ntavie，所以联想到模仿一个软件，来进入实战。模仿的是豆瓣电影。
+
++ yarn install
+
++ react-native run-android
+
+
++ 因为自己主要做react项目，所以对于使用react-native倒是挺得心应手。废话少说直接上图吧。
+
+#### 目前进度
+
+![图片](https://sharkwarn.github.io/icon/react-natvie3.gif)

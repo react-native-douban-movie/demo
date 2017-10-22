@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableHighlight, StyleSheet } from 'react-native'
 
 function SearchItem ({ data, navigation }) {
   const linkToBtn = (id) => {
-    console.warn(id);
+    // console.warn(id);
     navigation.navigate('MovieDetailScreen',{id:id})
   }
   return (

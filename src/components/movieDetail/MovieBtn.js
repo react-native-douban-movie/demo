@@ -4,7 +4,6 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 function MovieBtn ({rating}) {
 
   const linkToBtn = () => {
-    console.log('yes')
   }
 
   return (

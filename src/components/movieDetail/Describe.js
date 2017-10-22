@@ -28,7 +28,7 @@ class Describe extends React.Component{
       <View style={styles.container}>
         <Text style={styles.title}>剧情简介：</Text>
         <Text style={styles.content}>{this.renderText()}</Text>
-        <TouchableHighlight onPressOut={this.handleClick}>
+        <TouchableHighlight onPressOut={this.handleClick} underlayColor="#ddd">
           <Text style={styles.text} >{this.state.all ? `收起` : `展开`}</Text>
         </TouchableHighlight>
       </View>
