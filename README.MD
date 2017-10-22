@@ -14,3 +14,4 @@
 #### 目前进度
 
 ![图片](https://sharkwarn.github.io/icon/react-natvie3.gif)
+<img src="https://sharkwarn.github.io/icon/react-natvie3.gif" />
